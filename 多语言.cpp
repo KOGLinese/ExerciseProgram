@@ -7,6 +7,13 @@
 #include<string>
 #include<cmath>
 using namespace std;
+int n;//题数 
+srand((unsigned)time(NULL));//不出现相同的随机数 
+char a[4];//随机整数 
+char oper[3];//随机运算符 
+char express[15];//表达式
+double answers;//一次程序 最多到达1000题，
+int i,j,k;
 template <class T>
 void StackClear(stack<T> &s)			//清空栈
 {
@@ -183,6 +190,7 @@ char change(int x)//随机数转变成运算符
 }
 void Choose(char c,int a)//语言选择 
 {
+	
 	string s;
 	int sb;
 	ifstream inf;	//读取文件 
@@ -220,46 +228,30 @@ void Choose(char c,int a)//语言选择
 	}
 	inf.close();//关闭文件	
 }
-int main()
+char randomNumber()//用于随机生成数字
 {
-	
-	cout<<"请选择语言类:"<<endl;
-	cout<<"C.中文	E.英语	J.日语	F.法语	G.德语" <<endl;
-	char language;
-	srand((unsigned)time(NULL));//不出现相同的随机数 
-	char express[15];//表达式
-	int i,j,k;
-	double right=0;//正确数的计算 
-	int n;//题数 
-	int casenum;//有无括号的随机情况 
-	double answers;//一次程序 最多到达1000题，
-	int inputanswer;//输入的答案
-	char a,b,c,d;//随机整数 
-	char oper1,oper2,oper3;//随机运算符 
-	cin >> language;
-	Choose(language,1);
-	cin >> n;
-	for(i=0;i<n;i++)
-	{
-		a=rand()%10+48;
-		b=rand()%10+48;
-		c=rand()%10+48;
-		d=rand()%10+48;
-		oper1=change(rand()%4);
-		oper2=change(rand()%4);
-		oper3=change(rand()%4);
-		casenum=rand()%6;//六种情况 
+	return rand()%10+48;
+} 
+char randomOperation()//用于随机生成运算符
+{
+	return change(rand()%4);
+}
+char * generateExpression()//用于生成运算式
+{
+	int casenum;//有无括号的随机情况
+	casenum=rand()%6;//六种情况 
 		switch(casenum)
 		{
 			case 0://无括号情况 
-			express[0]=a;
-			express[1]=oper1;
-			express[2]=b;
-			express[3]=oper2;
-			express[4]=c;
-			express[5]=oper3;
-			express[6]=d;
-			express[7]='=';break;
+			express[0]=a[0];
+			express[1]=oper[0];
+			express[2]=a[1];
+			express[3]=oper[1];
+			express[4]=a[2];
+			express[5]=oper[2];
+			express[6]=a[3];
+			express[7]='=';
+			break;
 			case 1://(a o1 b)o2 c o3 g = ?
 			express[0]='(';
 			express[1]=a;
@@ -318,8 +310,49 @@ int main()
 			express[7]=d;
 			express[8]=')';
 			express[9]=	'=';
-			
 		}
+	return express;
+}
+int calculateResult()//用于计算生成的运算式的结果
+{
+	answers=CalcExp(express);//储存正确答案
+	if(answers==(int)answers) //检查是否存在小数 ，结果检验
+	{
+		cout << i+1 <<".  "<<express ;
+	} 
+	
+	return 
+}
+
+void scanf()
+{
+	char language;
+
+	cout<<"请选择语言类:"<<endl;
+	cout<<"C.中文	E.英语	J.日语	F.法语	G.德语" <<endl;
+	cin>>language;
+	Choose(language,1);
+	cin >> n;
+}
+int main()
+{
+
+	srand((unsigned)time(NULL));//不出现相同的随机数 
+
+
+	double right=0;//正确数的计算 
+	int n;//题数 
+ 
+	int inputanswer;//输入的答案
+	for(i=0;i<4;i++)
+	{
+		a[i]=randomNumber();
+	}
+	for(i=0;i<3;i++){
+		oper[i]=randomOperation();
+	}
+	for(i=0;i<n;i++)
+	{
 		answers=CalcExp(express);//储存正确答案 
 		if(answers==(int)answers) //检查是否存在小数 ，结果检验 
 		{
@@ -328,7 +361,7 @@ int main()
 			if(inputanswer==answers) 
 			{
 			right++;//正确则++
-			Choose(language,3);	
+			Choose(language,3);
 			} 
 			else 
 			{
@@ -348,7 +381,7 @@ int main()
 			express[j]='\0';
 			}
 			continue;
-		}	
+		}
 	}	
 		Choose(language,4);
 		cout << right/i <<endl; 
