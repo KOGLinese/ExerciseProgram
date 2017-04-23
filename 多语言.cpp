@@ -7,12 +7,9 @@
 #include<string>
 #include<cmath>
 using namespace std;
-int n;//题数 
-double r=0;//正确数的计算 
-char a[4];//随机整数 
-char oper[3];//随机运算符 
-double answers;//计算正确结果 
-int inputanswer;//输入的答案
+
+
+
 char language;//输入语言 
 template <class T>
 void StackClear(stack<T> &s)			//清空栈
@@ -331,11 +328,11 @@ int scanf()
 }
 int scanf2(int answers)
 {
+	int inputanswer;//输入的答案
 	int inputeranswer;
 	cin >> inputanswer;
 	if(inputanswer==answers) 
 	{
-		r++;//正确则++
 		Choose(language,3);
 		return 1;
 	} 
@@ -355,7 +352,10 @@ void print(double r,double sum)
 int main()
 {
 	double n,right=0;
+	char a[4];//随机整数 
+	char oper[3];//随机运算符 
 	char *ex; 
+	double answers;//存储正确结果 
 	n=scanf();//开始界面
 	for(int i=0;i<n;i++)
 	{
