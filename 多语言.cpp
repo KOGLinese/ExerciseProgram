@@ -8,12 +8,14 @@
 #include<cmath>
 using namespace std;
 int n;//题数 
-srand((unsigned)time(NULL));//不出现相同的随机数 
+double r=0;//正确数的计算 
 char a[4];//随机整数 
 char oper[3];//随机运算符 
 char express[15];//表达式
-double answers;//一次程序 最多到达1000题，
+double answers;//计算正确结果 
 int i,j,k;
+int inputanswer;//输入的答案
+char language;//输入语言 
 template <class T>
 void StackClear(stack<T> &s)			//清空栈
 {
@@ -116,7 +118,7 @@ double calculate(double a,int oper,double b)
 （5）遇到左括号“（”时则直接压入操作符栈顶。
 （6）遇到右括号“）”时则依次弹出操作符栈顶的运算符运算数字栈的最顶上两个数字，直到弹出的操作符为左括号。
 */
-double CalcExp(char express[])
+double calculateResult(char express[])//用于计算结果 
 {
 	double a,b;				//两个操作数
 	char opera;				//运算符
@@ -230,13 +232,15 @@ void Choose(char c,int a)//语言选择
 }
 char randomNumber()//用于随机生成数字
 {
+
 	return rand()%10+48;
 } 
 char randomOperation()//用于随机生成运算符
 {
+
 	return change(rand()%4);
 }
-char * generateExpression()//用于生成运算式
+void generateExpression()//用于生成运算式
 {
 	int casenum;//有无括号的随机情况
 	casenum=rand()%6;//六种情况 
@@ -254,136 +258,130 @@ char * generateExpression()//用于生成运算式
 			break;
 			case 1://(a o1 b)o2 c o3 g = ?
 			express[0]='(';
-			express[1]=a;
-			express[2]=oper1;
-			express[3]=b;
+			express[1]=a[0];
+			express[2]=oper[0];
+			express[3]=a[1];
 			express[4]=')';
-			express[5]=oper2;
-			express[6]=c;
-			express[7]=oper3;
-			express[8]=d;
+			express[5]=oper[1];
+			express[6]=a[2];
+			express[7]=oper[2];
+			express[8]=a[3];
 			express[9]='=';	break;
 			case 2://(a o1 b o2 c) o3 d = ?
 			express[0]='(';
-			express[1]=a;
-			express[2]=oper1;
-			express[3]=b;
-			express[4]=oper2;
-			express[5]=c;
+			express[1]=a[0];
+			express[2]=oper[0];
+			express[3]=a[1];
+			express[4]=oper[1];
+			express[5]=a[2];
 			express[6]=')';
-			express[7]=oper3;
-			express[8]=d;
+			express[7]=oper[2];
+			express[8]=a[3];
 			express[9]='=';	
 			break;
 			case 3://a o1 ( b o2 c) o3 d = ?
-			express[0]=a;
-			express[1]=oper1;
+			express[0]=a[0];
+			express[1]=oper[0];
 			express[2]='(';
-			express[3]=b;
-			express[4]=oper2;
-			express[5]=c;
+			express[3]=a[1];
+			express[4]=oper[1];
+			express[5]=a[2];
 			express[6]=')';
-			express[7]=oper3;
-			express[8]=d;
+			express[7]=oper[2];
+			express[8]=a[3];
 			express[9]='=';
 			break;
 			case 4://a o1 (b o2 c o3 d) = ?
-			express[0]=a;
-			express[1]=oper1;
+			express[0]=a[0];
+			express[1]=oper[0];
 			express[2]='(';
-			express[3]=b;
-			express[4]=oper2;
-			express[5]=c;
-			express[6]=oper3;
-			express[7]=d;
+			express[3]=a[1];
+			express[4]=oper[1];
+			express[5]=a[2];
+			express[6]=oper[2];
+			express[7]=a[3];
 			express[8]=')';
 			express[9]='=';
 			break;
 			default://a o1 b o2 (c o3 d) =?
-			express[0]=a;
-			express[1]=oper1;
-			express[2]=b;
-			express[3]=oper2;
+			express[0]=a[0];
+			express[1]=oper[0];
+			express[2]=a[1];
+			express[3]=oper[1];
 			express[4]='(';
-			express[5]=c;
-			express[6]=oper3;
-			express[7]=d;
+			express[5]=a[2];
+			express[6]=oper[2];
+			express[7]=a[3];
 			express[8]=')';
 			express[9]=	'=';
 		}
-	return express;
 }
-int calculateResult()//用于计算生成的运算式的结果
-{
-	answers=CalcExp(express);//储存正确答案
-	if(answers==(int)answers) //检查是否存在小数 ，结果检验
-	{
-		cout << i+1 <<".  "<<express ;
-	} 
-	
-	return 
-}
-
 void scanf()
 {
-	char language;
-
+	
 	cout<<"请选择语言类:"<<endl;
 	cout<<"C.中文	E.英语	J.日语	F.法语	G.德语" <<endl;
 	cin>>language;
 	Choose(language,1);
 	cin >> n;
 }
+void scanf2()
+{
+	cout << i+1 <<".  "<<express ;
+	cin >> inputanswer;
+	if(inputanswer==answers) 
+	{
+		r++;//正确则++
+		Choose(language,3);
+	} 
+	else 
+	{
+		Choose(language,2);
+		cout << answers<<endl; 
+	}
+	for(j=0;j<=9;j++)//将表达式重新变为零 
+	{
+		express[j]='\0';
+	}
+}
+void print()
+{
+		Choose(language,4);
+		cout << r/i <<endl;
+}
+void clear()
+{
+	for(int j=0;j<=9;j++)
+	{
+		express[j]='\0';
+	}
+} 
 int main()
 {
-
-	srand((unsigned)time(NULL));//不出现相同的随机数 
-
-
-	double right=0;//正确数的计算 
-	int n;//题数 
- 
-	int inputanswer;//输入的答案
-	for(i=0;i<4;i++)
-	{
-		a[i]=randomNumber();
-	}
-	for(i=0;i<3;i++){
-		oper[i]=randomOperation();
-	}
+	scanf();//开始界面 
 	for(i=0;i<n;i++)
 	{
-		answers=CalcExp(express);//储存正确答案 
-		if(answers==(int)answers) //检查是否存在小数 ，结果检验 
+		srand((unsigned)time(NULL));//不出现相同的随机数 
+		for(int j=0;j<4;j++)
 		{
-			cout << i+1 <<".  "<<express ;
-			cin >> inputanswer;
-			if(inputanswer==answers) 
-			{
-			right++;//正确则++
-			Choose(language,3);
-			} 
-			else 
-			{
-				Choose(language,2);
-				cout << answers<<endl; 
-			}
-			for(j=0;j<=9;j++)//将表达式重新变为零 
-			{
-			express[j]='\0';
-			}
-		}
-		else//如果答案为小数，则重新进行循环 
+		//	srand((unsigned)time(NULL));//不出现相同的随机数 
+			a[j]=randomNumber();//随机数 
+		}			
+		for(int j=0;j<3;j++)
+		{
+		//	srand((unsigned)time(NULL));//不出现相同的随机数 
+			oper[j]=randomOperation();//运算符 
+		}			
+		generateExpression();//将随机数储存到表达式数组中 	
+		answers=calculateResult(express);//储存正确答案 	
+		if(answers==(int)answers) //检查是否存在小数 ，结果检验 
+			scanf2();//不是小数则进行输入答案 	
+		else//如果答案为小数，则重新进行循环
 		{
 			i=i-1;
-			for(j=0;j<=9;j++)
-			{
-			express[j]='\0';
-			}
-			continue;
+			clear();//清楚表达式数组 
 		}
 	}	
-		Choose(language,4);
-		cout << right/i <<endl; 
+	print();//结果诊断 	
 	return 0;
 }
