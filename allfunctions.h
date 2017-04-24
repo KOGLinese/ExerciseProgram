@@ -181,7 +181,6 @@ char change(int x)//随机数转变成运算符
 		default:return '/';
 	}
 }
-
 void Choose(char c,int a)//语言选择 
 {
 	
@@ -222,19 +221,16 @@ void Choose(char c,int a)//语言选择
 	}
 	inf.close();//关闭文件	
 }
-
 char randomNumber()//用于随机生成数字
 {
 
 	return rand()%10+48;
 } 
-
 char randomOperation()//用于随机生成运算符
 {
 
 	return change(rand()%4);
 }
-
 char * generateExpression(char num[],char o[])//用于生成运算式
 {
 	int casenum;//有无括号的随机情况
@@ -317,7 +313,6 @@ char * generateExpression(char num[],char o[])//用于生成运算式
 		}
 		return express;
 }
-
 int scanf()
 {
 	int k;
@@ -328,7 +323,6 @@ int scanf()
 	cin >> k;
 	return k;
 }
-
 int scanf2(int answers)
 {
 	int inputanswer;//输入的答案
@@ -346,54 +340,9 @@ int scanf2(int answers)
 		return 0;
 	}
 }
-
 void print(double r,double sum)
 {
 
 		Choose(language,4);
 		cout << r/sum <<endl;
-}
-
-int main()
-{
-	double n,right=0;//题数，和正确题数 
-	
-	char a[4];//随机整数 
-	
-	char oper[3];//随机运算符 
-	
-	char *ex; //表达式存储 
-	
-	double answers;//存储表达式计算结果 
-	
-	n=scanf();//开始界面
-	
-	for(int i=0;i<n;i++)
-	{
-		srand((unsigned)time(NULL));//不出现相同的随机数 
-		
-		for(int j=0;j<4;j++)
-			a[j]=randomNumber();//随机数 
-					
-		for(int j=0;j<3;j++)
-			oper[j]=randomOperation();//运算符 
-					
-		ex=generateExpression(a,oper);//表达式 
-		
-		answers=calculateResult(ex);//储存正确答案 	
-
-		if(answers==(int)answers) //检查是否存在小数 ，结果检验 
-		{
-			cout << i+1 <<".  "<<ex;
-			right+=scanf2(answers);//不是小数则进行输入答案
-		}
-		else//如果答案为小数，则重新进行循环
-			i=i-1;
-			
-		delete [] ex;//删除动态内存 
-	}	
-
-	print(right,n);//结果诊断 	
-	
-	return 0;
 }
