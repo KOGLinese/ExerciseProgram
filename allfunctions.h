@@ -223,12 +223,10 @@ void Choose(char c,int a)//语言选择
 }
 char randomNumber()//用于随机生成数字
 {
-
 	return rand()%10+48;
 } 
 char randomOperation()//用于随机生成运算符
 {
-
 	return change(rand()%4);
 }
 char * generateExpression(char num[],char o[])//用于生成运算式
@@ -313,15 +311,12 @@ char * generateExpression(char num[],char o[])//用于生成运算式
 		}
 		return express;
 }
-int scanf()
+void scanf()
 {
-	int k;
 	cout<<"请选择语言类:"<<endl;
 	cout<<"C.中文	E.英语	J.日语	F.法语	G.德语" <<endl;
 	cin>>language;
 	Choose(language,1);
-	cin >> k;
-	return k;
 }
 int scanf2(int answers)
 {
@@ -331,13 +326,13 @@ int scanf2(int answers)
 	if(inputanswer==answers) 
 	{
 		Choose(language,3);
-		return 1;
+		return inputanswer*10+1;
 	} 
 	else 
 	{
 		Choose(language,2);
 		cout << answers<<endl; 
-		return 0;
+		return inputanswer*10+0;
 	}
 }
 void print(double r,double sum)
@@ -345,4 +340,24 @@ void print(double r,double sum)
 
 		Choose(language,4);
 		cout << r/sum <<endl;
+}
+void writeFile(char *s,int n,char * p,double rans,double inans)
+{
+	ofstream fout;
+	fout.open(s);
+	fout<<"题目数："<< n<<endl;
+	fout<<"表达式："<< p<<endl;
+	fout<<"正确答案："<< rans<<endl;
+	fout<<"输入的答案："<< inans<<endl; 
+	fout.close();
+}
+string readFile(char * s)
+{
+	ifstream fin;
+	fin.open(s);
+	string ch;
+	int n;
+	getline(fin,ch,'\n');
+	fin.close();
+	return ch;
 }

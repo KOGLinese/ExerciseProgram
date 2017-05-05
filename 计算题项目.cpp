@@ -1,9 +1,11 @@
 #include <iostream>
 #include "allfunctions.h" 
-int main()
+int main(int argc,char *argv[])
 {
-	double n,right=0;
 	
+	double right=0;
+	
+	int n;
 	char a[4];//随机整数 
 	
 	char oper[3];//随机运算符
@@ -11,8 +13,8 @@ int main()
 	char *ex; 
 	
 	double answers;//存储正确结果 
-	
-	n=scanf();//开始界面
+	n=atoi(readFile(argv[1]).c_str());
+	scanf();//开始界面
 	
 	for(int i=0;i<n;i++)
 	{
@@ -31,7 +33,9 @@ int main()
 		if(answers==(int)answers) //检查是否存在小数 ，结果检验 
 		{
 			cout << i+1 <<".  "<<ex;
-			right+=scanf2(answers);//不是小数则进行输入答案
+			right+=scanf2(answers)%10;//不是小数则进行输入答案
+			
+			writeFile(argv[2],n,ex,(int)answers,(int)(scanf2(answers)/10));
 		}
 		
 		else//如果答案为小数，则重新进行循环
