@@ -311,7 +311,7 @@ void scanf()
 	cin >> language;
 	Choose(language, 1);
 }
-int Coutright(double answers,double inputanswer)
+int Coutright(double answers,double inputanswer)//计算正确数 
 {
 	if (inputanswer == answers)
 	{
@@ -331,7 +331,7 @@ void print(double r, double sum)
 	Choose(language, 4);
 	cout << r / sum << endl;
 }
-void writeFile(char *s, char * p, double rans, double inans)
+void writeFile(char *s, char * p, double rans, double inans)//每题内容的写入 
 {
 	ofstream fout;
 	fout.open(s,ios::app);
@@ -340,7 +340,7 @@ void writeFile(char *s, char * p, double rans, double inans)
 	fout<< "输入的答案：" << inans << endl<<endl;
 	fout.close();
 }
-void writeFile2(char *s,double n,double right)
+void writeFile2(char *s,double n,double right)//每次运行的结果总结 
 {
 	ofstream fout;
 	fout.open(s,ios::app);
@@ -349,7 +349,7 @@ void writeFile2(char *s,double n,double right)
 	fout<<"正确率为："<< right/n<<endl<<endl;
 	fout.close();
 } 
-int readFile(char * s)
+int readFile(char * s)//读取题数 
 {
 	fstream fin;
 	fin.open(s,ios::in);
