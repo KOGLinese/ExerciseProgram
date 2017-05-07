@@ -34,17 +34,15 @@ int main(int argc, char *argv[])
 
 		if (answers == (int)answers) //检查是否存在小数 ，结果检验 
 		{
-			inputanswer = scanf2(ex, i);
+			inputanswer = scanf2(ex, i);//人机交互 
 			right += Coutright(answers, inputanswer);//不是小数则进行输入答案
-			writeFile(argv[2], ex, answers, inputanswer);
+			writeFile(argv[2], ex, answers, inputanswer);//内容的写入 
 		}
 		else//如果答案为小数，则重新进行循环
 			i = i - 1;
-
 		delete[] ex;
 	}
- 	writeFile2(argv[2],n,right);
+ 	writeFile2(argv[2],n,right);//总结写入 
 	print(right, n);//结果诊断 
-
 	return 0;
 }
