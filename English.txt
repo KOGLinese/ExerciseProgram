@@ -1,6 +1,6 @@
 Welcome to use the English interface
 PS: enter the answer after "="
-Please enter the required number of:
+   
 Wrong!right answer is :
 Right!
 Correct rate is :

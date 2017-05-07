@@ -1,0 +1,4 @@
+﻿LINK : warning LNK4075: 忽略“/INCREMENTAL”(由于“/PROFILE”规范)
+func.obj : warning LNK4075: 忽略“/EDITANDCONTINUE”(由于“/OPT:REF”规范)
+  vscal.vcxproj -> E:\CAL\vscal\Debug\vscal.exe
+  vscal.vcxproj -> E:\CAL\vscal\Debug\vscal.pdb (Partial PDB)
