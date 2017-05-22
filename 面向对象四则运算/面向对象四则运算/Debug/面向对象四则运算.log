@@ -1,0 +1,5 @@
+﻿  main.cpp
+e:\cal\面向对象四则运算\面向对象四则运算\main.cpp(9): warning C4101: “k”: 未引用的局部变量
+e:\cal\面向对象四则运算\面向对象四则运算\main.cpp(9): warning C4101: “j”: 未引用的局部变量
+  面向对象四则运算.vcxproj -> E:\CAL\面向对象四则运算\Debug\面向对象四则运算.exe
+  面向对象四则运算.vcxproj -> E:\CAL\面向对象四则运算\Debug\面向对象四则运算.pdb (Partial PDB)

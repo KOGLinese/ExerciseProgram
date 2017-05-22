@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 
 		if (answers == (int)answers) //检查是否存在小数 ，结果检验 
 		{
-			inputanswer = scanf2(ex, i);//人机交互 
+			inputanswer = scanf2(ex, i);//人机交互
 			right += Coutright(answers, inputanswer);//不是小数则进行输入答案
 			writeFile(argv[2], ex, answers, inputanswer);//内容的写入 
 		}

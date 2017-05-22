@@ -19,6 +19,7 @@ private:
 	double calculate(double a, int oper, double b);
 public:
 	double calculateResult(char * express);
+	bool IsInt(double answer);
 	char * generateExpression();
 };
 
@@ -28,7 +29,9 @@ private:
 	ifstream inf;//读取语言文件
 public:
 		void set(char c);//外界传入
-		void scanf();//初始化界面
+		void scanf();//初始化界面'
+		void scanf2(char * p, int i);
+		void print(double r, double sum);//
 		void Choose(int a);//语言选择，以及选择输出 结果情况
 };
 class R_and_W//读取类
@@ -43,5 +46,5 @@ public :
 	int readFile(char *s);
 	void writeFile1(char *s, char * p, double rans, double inans);
 	void writeFile2(char *s, double right);
-	int Countright(double answers, Language l, char c);
+	int Countright(double answers, double inputanswer, Language &l);
 };

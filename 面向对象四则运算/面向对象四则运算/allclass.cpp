@@ -154,8 +154,22 @@ double expresses::calculateResult(char * express)
 	StackClear(data);		//清空两个栈
 	return 	num;	//返回数字栈栈顶元素，即为计算结果
 }
+bool expresses::IsInt(double answer)
+{
+	if (answer == (int)answer) return true;
+	else return false;
+}
 char * expresses:: generateExpression()
 {
+	srand((unsigned)time(NULL));//不出现相同的随机数
+	for (int i = 0; i < 4; i++)
+	{
+		a[i] = randomNumber();
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		o[i] = randomOperation();
+	}
 	int casenum;//有无括号的随机情况
 	char * express = new char[18];//表达式
 	for (int j = 0; j<15; j++)
@@ -247,8 +261,10 @@ void Language::set(char c)
 void Language::scanf() {
 	cout << "请选择语言类:" << endl;
 	cout << "C.中文	E.英语	J.日语	F.法语	G.德语" << endl;
-	
-	
+}
+void Language::scanf2(char * p, int i)
+{
+	cout << i + 1 << ".  " << p;
 }
 void Language::Choose(int a)
 {
@@ -289,7 +305,11 @@ void Language::Choose(int a)
 	}
 	inf.close();//关闭文件	
 }
-
+void Language::print(double r, double sum)
+{
+	Choose(4);
+	cout << r / sum << endl;
+}
 
 
 
@@ -321,9 +341,8 @@ void R_and_W::writeFile2(char *s,double right)
 	fout << "正确率为：" << right / n << endl << endl;
 	fout.close();
 }
-int R_and_W::Countright(double answers,Language l,char c)
+int R_and_W::Countright(double answers,double inputanswer,Language &l)
 {
-	l.set(c);
 	if (inputanswer == answers)
 	{
 		l.Choose(3);
