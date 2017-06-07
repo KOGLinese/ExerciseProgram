@@ -5,24 +5,6 @@ void StackClear(stack<T> &s)			//清空栈
 	while (!s.empty())
 		s.pop();
 }
-char expresses::change(int x)
-{
-	switch (x)
-	{
-	case 0:return '+';
-	case 1:return '-';
-	case 3:return '*';
-	default:return '/';
-	}
-}
-char expresses::randomNumber()
-{
-	return rand() % 10 + 48;
-}
-char expresses::randomOperation()
-{
-	return change(rand() % 4);
-}
 int	 expresses::IsOperator(char c)//判断是否为运算符
 {
 	switch (c)
@@ -161,14 +143,20 @@ bool expresses::IsInt(double answer)
 }
 char * expresses:: generateExpression()
 {
+	RandomFactory * fptr = new RandomFactory();
+	
 	srand((unsigned)time(NULL));//不出现相同的随机数
 	for (int i = 0; i < 4; i++)
 	{
-		a[i] = randomNumber();
+		Random * rand_ptr = fptr->produce(1);
+		a[i] = rand_ptr->get_rand(rand_ptr->create());
+		delete rand_ptr;
 	}
 	for (int i = 0; i < 3; i++)
 	{
-		o[i] = randomOperation();
+		Random * rand_ptr = fptr->produce(2);
+		o[i] = rand_ptr->get_rand(rand_ptr->create());
+		delete rand_ptr;
 	}
 	int casenum;//有无括号的随机情况
 	char * express = new char[18];//表达式
@@ -354,4 +342,27 @@ int R_and_W::Countright(double answers,double inputanswer,Language &l)
 		cout << answers << endl;
 		return 0;
 	}
+}
+int randomNumber::create()
+{
+	return rand() % 10;
+}
+int  randomOperator::create()
+{
+	return rand() % 4;
+}
+char randomOperator::get_rand(int k)
+{
+	switch (k)
+	{
+	case 0:return '+';
+	case 1:return '-';
+	case 2:return '*';
+	case 3:return '/';
+	default:return ' ';
+	}
+}
+char randomNumber::get_rand(int k)
+{
+	return k + 48;
 }
